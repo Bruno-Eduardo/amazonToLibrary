@@ -2,7 +2,7 @@ from forex_python.converter import CurrencyRates
 
 class Book:
     #args = (   unidade, seq, author, title, publisher, vol, year, edition, ISBN10, ISBN13, priority, quantity
-    #           unitValue, totalValue, observation, dollarFlag, unitValueWithTAxes, totalValuewithTaxesBRL, dollarPrice):
+    #           unitValue, totalValue, observation, internationalFlag, unitValueWithTAxes, totalValuewithTaxesBRL, dollarPrice):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
             #expecting  unidade, seq, author, title, publisher, vol, year, edition, ISBN10, ISBN13, priority, quantity,
@@ -20,12 +20,12 @@ class Book:
 
 class nationalBook(Book):
     def __init__(self, **kwargs):
-        self.dollarFlag = False
+        self.internationalFlag = False
         super(nationalBook, self).__init__(**kwargs)
 
 class internationalBook(Book):
     def __init__(self, **kwargs):
-        self.dollarFlag = True
+        self.internationalFlag = True
         self.dollarPrice = round(CurrencyRates().get_rate('USD', 'BRL'), 2)
         self.taxes = 40/100
         self.dolarRateWithTaxes = self.dollarPrice*(1+self.taxes)
