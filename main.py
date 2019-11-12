@@ -101,26 +101,30 @@ def main():
                           year=1899, edition=1, ISBN10="?"*10, ISBN13="?"*13, priority=1, quantity=1, unitValue=20,
                           observation="LivroBR")
 
+    brBook2 = nationalBook(unidade='FEM', seq=1, author='Machado', title='Memórias Póstumas', publisher="Unicamp", vol=1,
+                          year=1881, edition=1, ISBN10="?"*10, ISBN13="?"*13, priority=1, quantity=1, unitValue=20,
+                          observation="LivroBR")
+
     euaBook = internationalBook(unidade='FEM', seq=1, author='J. K. Rowling', title='Harry Potter', publisher="Rocco",
                                 vol=1, year=1997, edition=1, ISBN10="!"*10, ISBN13="!"*13, priority=2, quantity=1,
                                 unitValue=20, dollarFlag=True, observation="Livro Gringo")
 
     print(str(brBook))
     print(str(euaBook))
-
-    request.appendBook(brBook)
-    request.appendBook(euaBook)
+    print(str(brBook2))
 
     print(request)
     #TODO getUrls
     #TODO for url in urls:
     #    soup = openUrlAndSoup(urlToParse)
     #    anchorAndGet(soup) TODO: return useful data
-    #    request.appendBook()
 
-    #TODO parse Request to workbook
+    request.appendBook(brBook)
+    request.appendBook(euaBook)
+    request.appendBook(brBook2)
 
-    #wb =
+    request2workbook(request, wb)
+
     #TODO save workbook
 
 if __name__ == "__main__":
