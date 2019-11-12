@@ -43,6 +43,35 @@ class Request:
         out += str(vars(self))
         return out
 
+def request2workbook(r, wb):
+    nationalBooks       = [n for n in r.books if not n.internationalFlag]
+    internationalBooks  = [n for n in r.books if n.internationalFlag]
+
+
+    def fillRow(row, book):
+        #for i in columns:
+        #ws[i][row] = book.
+        pass
+
+
+    # Fill national sheet
+    wb.active = (wb.sheetnames.index('Nacionais'));     ws = wb.active
+
+    emptyCell =  [cell.value for cell in ws['A']].index('UNIDADE')
+    emptyCell += [cell.value for cell in ws['A'][emptyCell:]].index(None)
+
+    for i in range(len(nationalBooks)):
+        fillRow(emptyCell+i, nationalBooks[i])
+
+    # Fill international sheet
+    wb.active = (wb.sheetnames.index('Estrangeiros'));  ws = wb.active
+
+    emptyCell =  [cell.value for cell in ws['A']].index('UNIDADE')
+    emptyCell += [cell.value for cell in ws['A'][emptyCell:]].index(None)
+
+    for i in range(len(internationalBooks)):
+        fillRow(emptyCell+i, internationalBooks[i])
+
 
 def openUrlAndSoup(url):
     #TODO catch para urllib.error.URLError
